@@ -3,7 +3,7 @@
 
 Name:             picard-freeworld
 Version:          0.11
-Release:          4%{?dist}
+Release:          5%{?dist}
 Summary:          Acoustic fingerprinting for Picard tagger
 Group:            Applications/Multimedia
 
@@ -54,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitearch}/picard/musicdns/avcodec.so
 
 %changelog
+* Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.11-5
+- rebuild for new F11 features
+
 * Wed Jan 14 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.11-4
 - Remove check target, only useful in the base picard package.
 

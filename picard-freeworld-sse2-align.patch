@@ -1,0 +1,11 @@
+--- picard-0.11/picard/musicdns/avcodec.c.orig	2009-06-22 09:37:20.772856810 -0700
++++ picard-0.11/picard/musicdns/avcodec.c	2009-06-22 09:38:23.389856706 -0700
+@@ -271,7 +271,7 @@
+     sample_rate = codec_context->sample_rate;
+ 
+     buffer_size = 135 * channels * sample_rate * 2;
+-    buffer = (uint8_t *)malloc(buffer_size + AVCODEC_MAX_AUDIO_FRAME_SIZE);
++    buffer = (uint8_t *)memalign(16, buffer_size + AVCODEC_MAX_AUDIO_FRAME_SIZE);
+     buffer_ptr = buffer;
+     memset(buffer, 0, buffer_size);
+ 

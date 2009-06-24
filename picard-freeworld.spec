@@ -3,12 +3,13 @@
 
 Name:             picard-freeworld
 Version:          0.11
-Release:          4%{?dist}
+Release:          6%{?dist}
 Summary:          Acoustic fingerprinting for Picard tagger
 Group:            Applications/Multimedia
 
 Source0:          http://ftp.musicbrainz.org/pub/musicbrainz/picard/picard-%{version}.tar.gz
 Patch0:           %{name}-0.11-avsetup.patch
+Patch1:           %{name}-sse2-align.patch
 
 License:          GPLv2+
 Url:              http://musicbrainz.org/doc/PicardTagger
@@ -31,6 +32,7 @@ acoustic fingerprinting.
 %prep
 %setup -q -n picard-%{version}
 %patch0 -p0
+%patch1 -p1
 
 %build
 env %{__python} setup.py config
@@ -54,6 +56,12 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitearch}/picard/musicdns/avcodec.so
 
 %changelog
+* Tue Jun 23 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.11-6
+- Patch to fix segfaults using SSE2 (#678)
+
+* Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.11-5
+- rebuild for new F11 features
+
 * Wed Jan 14 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.11-4
 - Remove check target, only useful in the base picard package.
 

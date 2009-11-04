@@ -2,7 +2,7 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:             picard-freeworld
-Version:          0.12
+Version:          0.12.1
 Release:          1%{?dist}
 Summary:          Acoustic fingerprinting for Picard tagger
 Group:            Applications/Multimedia
@@ -54,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitearch}/picard/musicdns/avcodec.so
 
 %changelog
+* Wed Nov  4 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12.1-1
+- Update to upstream 0.12.1 (brown bag fix release)
+
 * Wed Oct 28 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12-1
 - Update to 0.12
 - Drop SSE2 patch, now applied upstream, hopefully fixes #678:

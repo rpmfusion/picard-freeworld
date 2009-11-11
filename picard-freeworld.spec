@@ -2,14 +2,13 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:             picard-freeworld
-Version:          0.11
-Release:          7%{?dist}
+Version:          0.12.1
+Release:          2%{?dist}
 Summary:          Acoustic fingerprinting for Picard tagger
 Group:            Applications/Multimedia
 
 Source0:          http://ftp.musicbrainz.org/pub/musicbrainz/picard/picard-%{version}.tar.gz
 Patch0:           %{name}-0.11-avsetup.patch
-Patch1:           %{name}-sse2-align.patch
 
 License:          GPLv2+
 Url:              http://musicbrainz.org/doc/PicardTagger
@@ -32,7 +31,6 @@ acoustic fingerprinting.
 %prep
 %setup -q -n picard-%{version}
 %patch0 -p0
-%patch1 -p1
 
 %build
 env %{__python} setup.py config
@@ -56,8 +54,16 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitearch}/picard/musicdns/avcodec.so
 
 %changelog
-* Tue Nov 10 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.11-7
-- Downgrade to 0.11 for F-12 release (GA).
+* Wed Nov 11 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12.1-2
+- Rebuild again for F-12 (bump release tag)
+
+* Wed Nov  4 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12.1-1
+- Update to upstream 0.12.1 (brown bag fix release)
+
+* Wed Oct 28 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12-1
+- Update to 0.12
+- Drop SSE2 patch, now applied upstream, hopefully fixes #678:
+  http://bugs.musicbrainz.org/ticket/5263
 
 * Tue Jun 23 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.11-6
 - Patch to fix segfaults using SSE2 (#678)

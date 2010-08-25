@@ -3,7 +3,7 @@
 
 Name:             picard-freeworld
 Version:          0.12.1
-Release:          2%{?dist}
+Release:          3%{?dist}
 Summary:          Acoustic fingerprinting for Picard tagger
 Group:            Applications/Multimedia
 
@@ -54,6 +54,9 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitearch}/picard/musicdns/avcodec.so
 
 %changelog
+* Wed Aug 25 2010 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12.1-3
+- Rebuild for Python 2.7
+
 * Wed Nov 11 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12.1-2
 - Rebuild again for F-12 (bump release tag)
 

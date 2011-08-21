@@ -2,13 +2,12 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:             picard-freeworld
-Version:          0.12.1
-Release:          3%{?dist}
-Summary:          Acoustic fingerprinting for Picard tagger
+Version:          0.15.1
+Release:          1%{?dist}
+Summary:          MusicBrainz-based audio tagger
 Group:            Applications/Multimedia
 
 Source0:          http://ftp.musicbrainz.org/pub/musicbrainz/picard/picard-%{version}.tar.gz
-Patch0:           %{name}-0.11-avsetup.patch
 
 License:          GPLv2+
 Url:              http://musicbrainz.org/doc/PicardTagger
@@ -19,18 +18,21 @@ BuildRequires:    desktop-file-utils
 BuildRequires:    PyQt4 >= 4.3
 BuildRequires:    python-mutagen > 1.9
 BuildRequires:    libofa-devel
+Requires:         PyQt4 >= 4.3
+Requires:         python-mutagen > 1.9
+Requires:         libdiscid
+BuildRequires:    libofa-devel
 BuildRequires:    ffmpeg-devel
 # Require matching main package picard from Fedora
 Requires:         picard = %{version}
 
 %description
 Picard is an audio tagging application using data from the MusicBrainz
-database. This add-on package supplies the library necessary for
-acoustic fingerprinting.
+database. The tagger is album or release oriented, rather than
+track-oriented.
 
 %prep
 %setup -q -n picard-%{version}
-%patch0 -p0
 
 %build
 env %{__python} setup.py config
@@ -54,33 +56,85 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitearch}/picard/musicdns/avcodec.so
 
 %changelog
-* Wed Aug 25 2010 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12.1-3
-- Rebuild for Python 2.7
+* Sun Aug 21 2011 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.15.1-1
+- Drop 0.11-avsetup patch 
+- Update to 0.15.1, sync with main package
+- Add more plugins
 
-* Wed Nov 11 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12.1-2
-- Rebuild again for F-12 (bump release tag)
+* Mon May 30 2011 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.15-0.1.beta1
+- Update to 0.15beta1 (#683055)
+- Convert plugin files to files in git, easier to manage
+- Only use plugins certified to be API compatible with 0.15 from
+  http://users.musicbrainz.org/~luks/picard-plugins/
 
-* Wed Nov  4 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12.1-1
+* Wed Feb 09 2011 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.12.1-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_15_Mass_Rebuild
+
+* Wed Jul 21 2010 David Malcolm <dmalcolm@redhat.com> - 0.12.1-2
+- Rebuilt for https://fedoraproject.org/wiki/Features/Python_2.7/MassRebuild
+
+* Tue Nov  3 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12.1-1
 - Update to upstream 0.12.1 (brown bag fix release)
 
-* Wed Oct 28 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12-1
-- Update to 0.12
-- Drop SSE2 patch, now applied upstream, hopefully fixes #678:
-  http://bugs.musicbrainz.org/ticket/5263
+* Tue Oct 27 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.12-1
+- Update to 0.12 (#531224)
+- Icons now in icons/hicolor directory
 
-* Tue Jun 23 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.11-6
-- Patch to fix segfaults using SSE2 (#678)
+* Sun Jul 26 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.11-4
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_12_Mass_Rebuild
 
-* Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 0.11-5
-- rebuild for new F11 features
+* Thu Feb 26 2009 Fedora Release Engineering <rel-eng@lists.fedoraproject.org> - 0.11-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_11_Mass_Rebuild
 
-* Wed Jan 14 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.11-4
-- Remove check target, only useful in the base picard package.
+* Tue Dec  9 2008 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.11-2
+- Fixed sources.
 
-* Fri Jan  2 2009 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.11-3
-- Rename to picard-freeworld as per review
-- Fix cp/install commands
-- Modified patch by Bob Arendt to skip test for <avcodec.h>
+* Tue Dec  9 2008 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.11-1
+- Update to latest upstream (0.11)
+- Drop upstreamed patch
+- Remove sed-ing of .desktop file
 
-* Mon Dec 29 2008 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.11-2
-- Initial RPM Fusion package for providing acoustic fingerprinting.
+* Sat Nov 29 2008 Ignacio Vazquez-Abrams <ivazqueznet+rpm@gmail.com> - 0.10-3
+- Rebuild for Python 2.6
+
+* Tue Sep  2 2008 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.10-2
+- Update plugin versions to 0.10 where possible.  
+- Temporarily disable the search plugins until they are ported to new API.
+
+* Sun Aug 31 2008 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.10-1
+- Update to latest upstream (0.10).
+- Add patch to work around broken setup.py.
+- Fixed some spec file errors: duplicate sources.
+
+* Sat Feb  9 2008 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.9.0-6
+- rebuilt for GCC 4.3 as requested by Fedora Release Engineering
+
+* Wed Dec 19 2007 Alex Lancaster <alexlan@fedoraproject.org> 0.9.0-5
+- Add support for python eggs for F9+
+
+* Wed Dec 19 2007 Alex Lancaster <alexlan@fedoraproject.org> 0.9.0-4
+- Update to proper release: 0.9.0
+- Drop plugins directory patch, applied upstream
+
+* Tue Dec 04 2007 Alex Lancaster <alexlan@fedoraproject.org> 0.9.0-0.6.beta1
+- strip out png extension from .desktop file
+
+* Tue Dec 04 2007 Alex Lancaster <alexlan@fedoraproject.org> 0.9.0-0.5.beta1
+- Add plugins from http://musicbrainz.org/doc/PicardQt/Plugins
+- Patch to find proper plugins directory (filed upstream:
+  http://bugs.musicbrainz.org/ticket/3430)
+- Does not depend on python-musicbrainz2 any longer, uses libdiscid directly 
+
+* Wed Nov 15 2007 Alex Lancaster <alexlan@fedoraproject.org> 0.9.0-0.4.beta1
+- Various minor spec file cleanups to make sure timestamps stay correct
+
+* Wed Nov 14 2007 Alex Lancaster <alexlan@fedoraproject.org> 0.9.0-0.3.beta1
+- Create pixmaps directory
+
+* Wed Nov 14 2007 Alex Lancaster <alexlan@fedoraproject.org> 0.9.0-0.2.beta1
+- Missing BR: python-devel
+- Use sitearch to make sure x86_64 builds work
+- Install icons share/pixmaps/, rather than share/icons/
+
+* Wed Nov 14 2007 Alex Lancaster <alexlan@fedoraproject.org> 0.9.0-0.1.beta1
+- Initial packaging

@@ -28,8 +28,8 @@ Requires:         picard = %{version}
 
 %description
 Picard is an audio tagging application using data from the MusicBrainz
-database. The tagger is album or release oriented, rather than
-track-oriented.
+database. This add-on package supplies the library necessary for
+acoustic fingerprinting.
 
 %prep
 %setup -q -n picard-%{version}

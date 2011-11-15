@@ -2,8 +2,8 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:             picard-freeworld
-Version:          0.15.1
-Release:          2%{?dist}
+Version:          0.16
+Release:          1%{?dist}
 Summary:          MusicBrainz-based audio tagger
 Group:            Applications/Multimedia
 
@@ -56,6 +56,9 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitearch}/picard/musicdns/avcodec.so
 
 %changelog
+* Tue Nov 15 2011 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.16-1
+- Sync with new 0.16 in Fedora
+
 * Mon Sep 26 2011 Nicolas Chauvet <kwizart@gmail.com> - 0.15.1-2
 - Rebuilt for FFmpeg-0.8
 

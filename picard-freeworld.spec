@@ -3,7 +3,7 @@
 
 Name:             picard-freeworld
 Version:          0.16
-Release:          1%{?dist}
+Release:          2%{?dist}
 Summary:          MusicBrainz-based audio tagger
 Group:            Applications/Multimedia
 
@@ -56,6 +56,9 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitearch}/picard/musicdns/avcodec.so
 
 %changelog
+* Thu Nov 17 2011 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.16-2
+- Bump version to enable F-16 build.
+
 * Tue Nov 15 2011 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.16-1
 - Sync with new 0.16 in Fedora
 

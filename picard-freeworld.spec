@@ -2,8 +2,8 @@
 %{!?python_sitearch: %define python_sitearch %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib(1)")}
 
 Name:             picard-freeworld
-Version:          0.16
-Release:          2%{?dist}
+Version:          1.0
+Release:          1%{?dist}
 Summary:          MusicBrainz-based audio tagger
 Group:            Applications/Multimedia
 
@@ -15,10 +15,10 @@ BuildRoot:        %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:    python-devel
 BuildRequires:    gettext
 BuildRequires:    desktop-file-utils
-BuildRequires:    PyQt4 >= 4.3
+BuildRequires:    PyQt4 >= 4.6
 BuildRequires:    python-mutagen > 1.9
 BuildRequires:    libofa-devel
-Requires:         PyQt4 >= 4.3
+Requires:         PyQt4 >= 4.6
 Requires:         python-mutagen > 1.9
 Requires:         libdiscid
 BuildRequires:    libofa-devel
@@ -56,6 +56,15 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitearch}/picard/musicdns/avcodec.so
 
 %changelog
+* Mon Jun  4 2012  Alex Lancaster <alexlan[AT]fedoraproject org> - 1.0-1
+- Sync with new 1.0 in Fedora
+
+* Tue Feb 28 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.16-4
+- Rebuilt for x264/FFmpeg
+
+* Wed Jan 25 2012 Nicolas Chauvet <kwizart@gmail.com> - 0.16-3
+- Rebuilt for https://fedoraproject.org/wiki/Fedora_17_Mass_Rebuild
+
 * Thu Nov 17 2011 Alex Lancaster <alexlan[AT]fedoraproject org> - 0.16-2
 - Bump version to enable F-16 build.
 

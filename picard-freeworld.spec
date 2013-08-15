@@ -3,7 +3,7 @@
 
 Name:             picard-freeworld
 Version:          1.1
-Release:          3%{?dist}
+Release:          4%{?dist}
 Summary:          MusicBrainz-based audio tagger
 Group:            Applications/Multimedia
 
@@ -56,6 +56,9 @@ rm -rf $RPM_BUILD_ROOT
 %{python_sitearch}/picard/musicdns/avcodec.so
 
 %changelog
+* Thu Aug 15 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.1-4
+- Rebuilt for FFmpeg 2.0.x
+
 * Sun May 26 2013 Nicolas Chauvet <kwizart@gmail.com> - 1.1-3
 - Rebuilt for x264/FFmpeg
 
